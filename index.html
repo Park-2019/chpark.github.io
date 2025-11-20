@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="박찬호 - 시스템 엔지니어 포트폴리오. 서버 구축, 네트워크 관리, 모니터링 시스템 전문.">
+    <meta name="keywords" content="시스템 엔지니어, System Engineer, 서버, 스토리지, 네트워크, 리눅스, Windows Server, 포트폴리오">
+    <meta name="author" content="박찬호">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chanho-park-portfolio.com/">
+    <meta property="og:title" content="박찬호 - System Engineer Portfolio">
+    <meta property="og:description" content="안정적인 시스템 운영과 효율적인 인프라 구축에 전문성을 가진 시스템 엔지니어입니다.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=Chanho+Park+Portfolio">
+
+    <title>박찬호 - System Engineer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f5f7fa;
+            padding-top: 70px;
+            /* Space for fixed nav */
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95em;
+        }
+
+        .nav-links a:hover {
+            color: #2a5298;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header with Hero Background */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 80px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, .03) 35px, rgba(255, 255, 255, .03) 70px);
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        header .subtitle {
+            font-size: 1.6em;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        header .contact-info {
+            display: flex;
+            gap: 35px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            font-size: 1em;
+        }
+
+        header .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Section Styling */
+        section {
+            background: white;
+            padding: 60px;
+            margin: 40px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        section h2 {
+            color: #1e3c72;
+            font-size: 2.2em;
+            font-weight: 600;
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e8eef5;
+            position: relative;
+        }
+
+        section h2::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: #2a5298;
+        }
+
+        /* About Section with Image */
+        .about-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1em;
+            line-height: 1.9;
+            color: #4a5568;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4em;
+            font-weight: 600;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: #f8fafc;
+            padding: 35px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: #2a5298;
+            box-shadow: 0 4px 12px rgba(42, 82, 152, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #4a5568;
+            font-size: 0.95em;
+        }
+
+        .skill-card li:before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: #2a5298;
+            font-size: 0.8em;
+        }
+
+        /* Experience Timeline */
+        .experience-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .experience-item {
+            position: relative;
+            padding: 30px;
+            margin-bottom: 30px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #2a5298;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -44px;
+            top: 40px;
+            width: 12px;
+            height: 12px;
+            background: #2a5298;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .experience-item h3 {
+            color: #1e3c72;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .experience-item .period {
+            color: #2a5298;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        .experience-item ul {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        .experience-item li {
+            margin-bottom: 10px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-card h3 {
+            color: #1e3c72;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .project-card .project-period {
+            color: #2a5298;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .project-card p {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 0.95em;
+        }
+
+        /* Achievements Stats */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .achievement-item {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: scale(1.05);
+        }
+
+        .achievement-item .number {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .achievement-item p {
+            font-size: 1em;
+            font-weight: 400;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        /* Education */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .education-item {
+            background: #f8fafc;
+            padding: 35px;
+            border-radius: 8px;
+            border-left: 4px solid #2a5298;
+        }
+
+        .education-item h3 {
+            color: #1e3c72;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .education-item p {
+            color: #4a5568;
+            margin: 8px 0;
+            font-size: 1em;
+        }
+
+        .education-item .year {
+            color: #2a5298;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: #a0aec0;
+            text-align: center;
+            padding: 50px 40px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            font-size: 1em;
+            margin: 8px 0;
+        }
+
+        footer .copyright {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2a5298;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            border: none;
+            pointer-events: none;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #back-to-top:hover {
+            transform: translateY(-3px);
+            background: #1e3c72;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+
+            .about-section,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid,
+            .achievement-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            nav {
+                height: 60px;
+            }
+
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+                /* Simple mobile menu hide for now, or could implement hamburger */
+            }
+
+            header {
+                padding: 60px 30px;
+            }
+
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header .subtitle {
+                font-size: 1.3em;
+            }
+
+            section {
+                padding: 40px 30px;
+            }
+
+            .main-content {
+                padding: 0 20px;
+            }
+
+            .skills-grid,
+            .achievement-grid,
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-timeline {
+                padding-left: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Chanho.P</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="header-content">
+            <h1>박찬호</h1>
+            <div class="subtitle">System Engineer</div>
+            <div class="contact-info" id="contact">
+                <span>✉ <a href="mailto:park_ch@kakao.com"
+                        style="color: white; text-decoration: none;">park_ch@kakao.com</a></span>
+                <span>☎ <a href="tel:010-6752-5567"
+                        style="color: white; text-decoration: none;">010-6752-5567</a></span>
+                <span>⚲ 서울</span>
+                <span>◷ 1998.06.09</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- About Me -->
+        <section id="about" class="fade-in-section">
+            <h2>Professional Summary</h2>
+            <div class="about-section">
+                <div class="about-text">
+                    <p>
+                        데이터 기반의 의사결정과 자동화를 통해 인프라 운영 효율을 극대화하는 4년차 시스템 엔지니어입니다.
+                        50개 이상의 공공/기업 인프라를 성공적으로 구축했으며, AI 기술을 접목한 업무 혁신을 주도합니다.
+                    </p>
+                    <p style="margin-top: 20px;">
+                        Zabbix/Grafana 모니터링 시스템으로 장애 대응 시간을 30% 단축시킨 경험이 있으며,
+                        Dell, HP, 슈퍼마이크로 등 다양한 서버 환경과 Synology/QNAP NAS 스토리지 솔루션에 대한
+                        실무 경험을 보유하고 있습니다. 새로운 기술을 빠르게 습득하고 적용하는 것을 즐기며,
+                        AI 도구를 활용한 업무 자동화로 팀 생산성을 40% 향상시킨 경험이 있습니다.
+                    </p>
+                </div>
+                <div class="about-image">
+                    SE
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Skills -->
+        <section id="skills" class="fade-in-section">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🖥</div>
+                    <h3>서버 / 스토리지</h3>
+                    <ul>
+                        <li>Dell/HP 서버 50+대 구축</li>
+                        <li>Synology/QNAP NAS 30+건</li>
+                        <li>VMware vSphere HA/DRS</li>
+                        <li>RAID 5/6/10 구성</li>
+                        <li>IPMI/iDRAC/iLO 원격관리</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <h3>모니터링 / 자동화</h3>
+                    <ul>
+                        <li>Zabbix/Grafana 구축</li>
+                        <li>Python/Bash/PowerShell</li>
+                        <li>24/7 실시간 감시 체계</li>
+                        <li>장애 예측 시스템</li>
+                        <li>업무 자동화 스크립팅</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <h3>OS / 네트워크</h3>
+                    <ul>
+                        <li>Linux/Windows Server</li>
+                        <li>Active Directory</li>
+                        <li>Cisco/FortiGate</li>
+                        <li>SSL 인증서 관리</li>
+                        <li>네트워크 장애 대응</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="fade-in-section">
+            <h2>Professional Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <h3>에이텍시스템 | 서버기술팀</h3>
+                    <div class="period">2024.12 ~ 재직중</div>
+                    <p><strong>주요 업무:</strong></p>
+                    <ul>
+                        <li>공공기관 및 기업 50곳 이상 서버/NAS 인프라 구축 및 운영</li>
+                        <li>Dell/HP/슈퍼마이크로 서버 50대+ 구축 및 시스템 가용성 99.9% 달성</li>
+                        <li>Synology/QNAP NAS 30건+ 구축 및 백업 솔루션 설계</li>
+                        <li>사내 IDC 관리 및 백본 네트워크 통신 구조 관리</li>
+                        <li>React+Node.js 기반 고객사 관리 CRM 개발 (AI 도구 활용)</li>
+                        <li>원격 관리 시스템(IPMI/iDRAC/iLO) 운영으로 현장 출동 50% 절감</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>하이온넷 | 클라우드팀</h3>
+                    <div class="period">2024.03 ~ 2024.12</div>
+                    <p><strong>주요 업무:</strong></p>
+                    <ul>
+                        <li>Cisco/FortiGate 네트워크 장비 구성 및 장애 대응</li>
+                        <li>Zabbix+Grafana 통합 모니터링 시스템 구축</li>
+                        <li>24/7 실시간 감시 및 알림 체계 구현</li>
+                        <li>장애 대응 시간 30% 단축 (2시간 → 1.4시간)</li>
+                        <li>시각화 대시보드를 통한 인프라 상태 통합 관리</li>
+                        <li>네트워크 보안 정책 수립 및 SSL 인증서 관리</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>KKDC | 생산팀</h3>
+                    <div class="period">2021.01 ~ 2023.04</div>
+                    <p><strong>주요 업무:</strong></p>
+                    <ul>
+                        <li>제조업 생산관리 시스템(MES) 서버 및 사내 네트워크 인프라 전담 운영</li>
+                        <li>노후 서버 가상화(P2V) 전환을 통해 하드웨어 유지비용 30% 절감</li>
+                        <li>24/7 생산라인 지원 및 긴급 장애 대응 체계 확립</li>
+                        <li>시스템 안정성 관리 및 예방 정비 계획 수립 및 실행</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="fade-in-section">
+            <h2>Key Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/real_server.jpg" alt="Server Infrastructure">
+                    </div>
+                    <div class="project-content">
+                        <h3>공공기관 엔터프라이즈 서버 인프라 구축</h3>
+                        <div class="project-period">2024.12 ~ 현재</div>
+                        <p>
+                            Dell PowerEdge 서버 50+대 구축 프로젝트. RAID 5/6/10 구성을 통한 데이터 안정성 확보.
+                            IPMI/iDRAC/iLO 원격 관리 시스템 설정으로 효율적 운영 환경 구축.
+                            시스템 가용성 99.9% 달성 및 고객사별 맞춤형 하드웨어 구성 제안.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/nas.png" alt="NAS Storage">
+                    </div>
+                    <div class="project-content">
+                        <h3>NAS 스토리지 솔루션 구축</h3>
+                        <div class="project-period">2024.01 ~ 현재</div>
+                        <p>
+                            Synology/QNAP NAS 30건+ 구축. 스냅샷, 하이퍼 백업, 액티브 백업 기능을 활용한
+                            맞춤형 백업 솔루션 제공. RAID 구성을 통한 데이터 안정성 확보 및
+                            자동 백업 스케줄 설정으로 데이터 손실 방지 체계 구축.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/crm.png" alt="CRM Dashboard">
+                    </div>
+                    <div class="project-content">
+                        <h3>고객사 인프라 관리 CRM 개발</h3>
+                        <div class="project-period">2024.12 ~ 현재</div>
+                        <p>
+                            React+TypeScript+Node.js 풀스택 개발. AI 코딩 어시스턴트(바이브코딩) 활용을 통한
+                            개발 생산성 200% 향상. 서버 정보, 고객사 정보, 장애 이력 통합 관리 시스템 구축.
+                            화이트리스트 및 방화벽 정책 연동으로 보안 강화. 업무 시간 40% 단축, 보고서 작성 효율 70% 향상.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/monitoring.png" alt="Monitoring System">
+                    </div>
+                    <div class="project-content">
+                        <h3>통합 모니터링 시스템 구축</h3>
+                        <div class="project-period">2024.03 ~ 2024.12</div>
+                        <p>
+                            Zabbix+Grafana 연동 통합 모니터링 시스템 구축. 서버 및 네트워크 장비의
+                            리소스 사용량, 트래픽, 장애 상태를 실시간 모니터링. 24시간 실시간 알림 체계 구현.
+                            장애 대응 시간 30% 단축 (2시간 → 1.4시간).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/real_server.jpg" alt="Network Infrastructure">
+                    </div>
+                    <div class="project-content">
+                        <h3>네트워크 인프라 구축 및 장애 대응</h3>
+                        <div class="project-period">2024.03 ~ 2024.12</div>
+                        <p>
+                            Cisco 스위치 및 FortiGate 방화벽을 활용한 네트워크 인프라 구축.
+                            네트워크 장비 설정, 방화벽 정책 관리, SSL 인증서 관리.
+                            체계적인 장애 대응 절차 수립으로 서비스 안정성 향상.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/monitoring.png" alt="IDC Operations">
+                    </div>
+                    <div class="project-content">
+                        <h3>IDC 운영 및 백본 네트워크 관리</h3>
+                        <div class="project-period">2024.03 ~ 2024.12</div>
+                        <p>
+                            사내 IDC 내부 관리 및 전체적인 백본-고객사 스위치 간 통신 관리.
+                            네트워크 아키텍처 설계 및 최적화. 서비스 판매를 위한 서버 셋팅 및
+                            고객사 커스터마이징 지원.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section class="fade-in-section">
+            <h2>Key Achievements</h2>
+            <div class="achievement-grid">
+                <div class="achievement-item">
+                    <div class="number">50+</div>
+                    <p>공공기관/기업<br>인프라 구축</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="number">99.9%</div>
+                    <p>시스템 가용성<br>달성</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="number">30%</div>
+                    <p>장애 대응 시간<br>단축</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="number">50%</div>
+                    <p>현장 출동<br>절감</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="number">40%</div>
+                    <p>업무 시간<br>단축</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="number">70%</div>
+                    <p>보고서 작성<br>효율 향상</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="fade-in-section">
+            <h2>Education & Certification</h2>
+            <div class="education-grid">
+                <div class="education-item">
+                    <h3>인덕대학교</h3>
+                    <p>산업경영공학과 학사</p>
+                    <p class="year">2021년 졸업</p>
+                </div>
+                <div class="education-item">
+                    <h3>컴퓨터활용능력 2급</h3>
+                    <p>대한상공회의소</p>
+                    <p class="year">2019년 취득</p>
+                </div>
+            </div>
+        </section>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>박찬호 | System Engineer</strong></p>
+        <p>Infrastructure Specialist · Server & Storage · Network Management</p>
+        <p class="copyright">© 2024 Chanho Park. All rights reserved.</p>
+    </footer>
+    <button id="back-to-top" title="Go to top">↑</button>
+
+    <script>
+        // Scroll Animation
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
